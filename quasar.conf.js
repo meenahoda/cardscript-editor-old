@@ -61,6 +61,7 @@ module.exports = function (ctx) {
         'QField',
         'QInput',
         'QSelect',
+        'QToggle',
         'QFab',
         'QFabAction',
         'QTooltip',

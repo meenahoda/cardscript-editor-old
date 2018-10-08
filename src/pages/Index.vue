@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    <q-card color="tertiary" style="min-width: 50vw; min-height: 50vh;">
+    <q-card color="dark no-shadow" style="min-width: 50vw; min-height: 50vh;">
       <q-card-title>QScript Form Editor</q-card-title>
       <q-card-main>
         <q-input
@@ -13,14 +13,23 @@
         <div class="text-light q-my-lg">Widgets</div>
         <div v-if="form.widgets.length === 0">There are no widgets.</div>
         <div v-else>
-          <div
+          <q-card
             v-for="(item, idx) in form.widgets"
             :key="idx"
+            color="tertiary"
+            class="q-mb-sm"
           >
-            <component
-              :is="widgets.result[idx]"
-            />
-          </div>
+            <q-card-main>
+              <div class="row">
+                <div class="col text-light">{{ item.id }}</div>
+                <div class="col text-light text-right">{{ item.type }}</div>
+              </div>
+              <component
+                :is="widgets.result[idx]"
+                :data="form.widgets[idx]"
+              />
+            </q-card-main>
+          </q-card>
         </div>
 
         <div class="text-light q-my-lg">Actions</div>
