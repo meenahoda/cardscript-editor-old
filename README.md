@@ -1,4 +1,4 @@
-# QScript-form-editor
+# QScript Form Editor
 
 > An editor to help create [QScript](https://github.com/wmfs/qscript) forms.
 
