@@ -111,16 +111,39 @@
         </div>
       </div>
 
-      <q-select
-        v-model="actions.inProgress.type"
-        :options="actions.available"
-        float-label="Type"
+      <q-input
+        v-model="actions.inProgress.title"
+        float-label="Title"
         dark
-        filter
         color="secondary"
         class="q-mb-lg"
-        :error="actions.errors.type"
       />
+
+      <q-select
+        v-model="actions.inProgress.style"
+        :options="actions.styles"
+        float-label="Style"
+        dark
+        color="secondary"
+        class="q-mb-lg"
+      />
+
+      <q-btn-toggle
+        v-model="actions.inProgress.type"
+        :options="actions.available"
+        toggle-color="secondary"
+        text-color="white"
+        class="q-mb-lg"
+      />
+
+      <div class="text-right">
+        <q-btn
+          icon="send"
+          round
+          color="secondary"
+          @click="addAction"
+        />
+      </div>
     </q-modal>
 
     <q-modal
@@ -151,7 +174,6 @@
         :options="widgets.available"
         float-label="Type"
         dark
-        filter
         color="secondary"
         class="q-mb-lg"
         :error="widgets.errors.type"
@@ -200,7 +222,12 @@ export default {
         available: [
           { label: 'Open URL', value: 'OpenURL' },
           { label: 'Submit', value: 'Submit' },
-          { label: 'Show View', value: 'Submit' }
+          { label: 'Show View', value: 'ShowView' }
+        ],
+        styles: [
+          { label: 'Positive', value: 'positive' },
+          { label: 'Negative', value: 'negative' },
+          { label: 'Warning', value: 'warning' }
         ],
         inProgress: {},
         errors: {}
@@ -210,10 +237,12 @@ export default {
   methods: {
     openActionModal () {
       this.actions.open = true
+      this.actions.inProgress = {}
     },
+    addAction () {},
     openWidgetsModal () {
       this.widgets.open = !this.widgets.open
-      this.widgets.inProgress = { id: '', type: '' }
+      this.widgets.inProgress = {}
     },
     addWidget () {
       const { id, type } = this.widgets.inProgress
