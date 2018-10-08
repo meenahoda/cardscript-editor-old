@@ -63,6 +63,14 @@
 
       <q-fab-action
         color="secondary"
+        icon="more_horiz"
+        @click="openActionModal"
+      >
+        <q-tooltip anchor="center left" self="center right" :offset="[20, 0]">Add Action</q-tooltip>
+      </q-fab-action>
+
+      <q-fab-action
+        color="secondary"
         icon="remove_red_eye"
       >
         <q-tooltip anchor="center left" self="center right" :offset="[20, 0]">Preview</q-tooltip>
@@ -87,6 +95,31 @@
         readonly
         dark
         color="secondary"
+      />
+    </q-modal>
+
+    <q-modal
+      v-model="actions.open"
+      content-classes="bg-dark q-pa-lg"
+    >
+      <div class="row">
+        <div class="col-10 text-grey q-mt-md">
+          Actions
+        </div>
+        <div class="col-2 text-right">
+          <q-btn icon="close" round flat color="secondary" @click="actions.open = !actions.open" />
+        </div>
+      </div>
+
+      <q-select
+        v-model="actions.inProgress.type"
+        :options="actions.available"
+        float-label="Type"
+        dark
+        filter
+        color="secondary"
+        class="q-mb-lg"
+        :error="actions.errors.type"
       />
     </q-modal>
 
@@ -175,6 +208,9 @@ export default {
     }
   },
   methods: {
+    openActionModal () {
+      this.actions.open = true
+    },
     openWidgetsModal () {
       this.widgets.open = !this.widgets.open
       this.widgets.inProgress = { id: '', type: '' }
