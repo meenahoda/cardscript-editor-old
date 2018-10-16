@@ -14,86 +14,80 @@
         <div v-if="form.widgets.length === 0">There are no widgets.</div>
         <div v-else>
           <draggable v-model="form.widgets">
-            <transition-group name="list-complete">
-              <q-card
-                v-for="(item, idx) in form.widgets"
-                :key="idx"
-                color="tertiary"
-                class="q-mb-sm list-complete-item"
-              >
-                <q-card-main>
-                  <div class="row">
-                    <div class="col text-light">{{ item.id }} /  {{ item.type }}</div>
-                    <div class="col text-light text-right">
-                      <q-icon name="drag_indicator" style="cursor: move;" />
-                    </div>
+            <q-card
+              v-for="(item, idx) in form.widgets"
+              :key="idx"
+              color="tertiary"
+              class="q-mb-sm"
+            >
+              <q-card-main>
+                <div class="row">
+                  <div class="col text-light">{{ item.id }} /  {{ item.type }}</div>
+                  <div class="col text-light text-right">
+                    <q-icon name="drag_indicator" style="cursor: move;" />
                   </div>
-                  <component
-                    :is="widgets.result[idx]"
-                    :data="form.widgets[idx]"
-                  />
-                  <div class="row">
-                    <div class="col text-right">
-                      <q-btn icon="delete" flat round @click="removeWidget(idx)">
-                        <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">Remove</q-tooltip>
-                      </q-btn>
-                    </div>
+                </div>
+                <component
+                  :is="widgets.result[idx]"
+                  :data="form.widgets[idx]"
+                />
+                <div class="row">
+                  <div class="col text-right">
+                    <q-btn icon="delete" flat round @click="removeWidget(idx)">
+                      <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">Remove</q-tooltip>
+                    </q-btn>
                   </div>
-                </q-card-main>
-              </q-card>
-            </transition-group>
+                </div>
+              </q-card-main>
+            </q-card>
           </draggable>
         </div>
 
         <div class="text-light q-my-lg">Actions</div>
         <div v-if="form.actions.length === 0">There are no actions.</div>
         <div v-else>
-          <draggable v-model="form.actions">
-            <transition-group name="list-complete">
-              <q-card
-                v-for="(item, idx) in form.actions"
-                :key="idx"
-                color="tertiary"
-                class="q-mb-sm"
-              >
-                <q-card-main>
-                  <div class="row">
-                    <div class="col">
-                      <q-input
-                        v-model="item.title"
-                        float-label="Title"
-                        class="q-mr-md"
-                        color="secondary"
-                        dark
-                      />
-                    </div>
-                    <div class="col">
-                      <q-select
-                        v-model="item.style"
-                        :options="actions.styles"
-                        float-label="Style"
-                        dark
-                        color="secondary"
-                        class="q-mb-lg"
-                      />
-                    </div>
-                  </div>
+          <q-card
+            v-for="(item, idx) in form.actions"
+            :key="idx"
+            color="tertiary"
+            class="q-mb-sm"
+          >
+            <q-card-main>
+              <div class="row">
+                <div class="col">
+                  <q-input
+                    v-model="item.title"
+                    float-label="Title"
+                    class="q-mr-md"
+                    color="secondary"
+                    dark
+                  />
+                </div>
+                <div class="col">
+                  <q-select
+                    v-model="item.style"
+                    :options="actions.styles"
+                    float-label="Style"
+                    dark
+                    color="secondary"
+                    class="q-mb-lg"
+                  />
+                </div>
+              </div>
 
-                  <div class="row">
-                    <div class="col">
-                      <q-btn-toggle
-                        v-model="item.type"
-                        :options="actions.available"
-                        toggle-color="secondary"
-                        text-color="white"
-                      />
-                    </div>
-                    <!-- TODO: config - dependant on type - need to delete if switch away from OpenURL -->
-                  </div>
-                </q-card-main>
-              </q-card>
-            </transition-group>
-          </draggable>
+              <div class="row">
+                <div class="col">
+                  <q-btn-toggle
+                    v-model="item.type"
+                    :options="actions.available"
+                    toggle-color="secondary"
+                    text-color="white"
+                  />
+                </div>
+                <!-- TODO: config - dependant on type - need to delete if switch away from OpenURL -->
+              </div>
+            </q-card-main>
+          </q-card>
         </div>
       </q-card-main>
     </q-card>
@@ -264,14 +258,6 @@
 </template>
 
 <style>
-/* .list-complete-item {
-  transition: all 1s;
-} */
-
-.list-complete-enter, .list-complete-leave-active {
-  opacity: 0;
-}
-
 a {
   color: #26a69a;
 }
@@ -296,7 +282,8 @@ export default {
         open: false,
         available: [
           { label: 'Text', value: 'Text' },
-          { label: 'Number', value: 'Number' }
+          { label: 'Number', value: 'Number' },
+          { label: 'Date', value: 'Date' }
         ],
         inProgress: {},
         errors: {
