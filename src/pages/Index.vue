@@ -164,15 +164,17 @@
         </div>
       </div>
 
-      <q-field helper="ID will be camel cased e.g. firstName, phoneNumber" class="q-mb-lg">
-        <q-input
-          v-model="widgets.inProgress.id"
-          float-label="ID"
-          dark
-          color="secondary"
-          :error="widgets.errors.id"
-        />
-      </q-field>
+      <q-input
+        v-model="widgets.inProgress.id"
+        float-label="ID"
+        dark
+        color="secondary"
+        :error="widgets.errors.id"
+      />
+      <div class="q-field-bottom">
+        <div class="q-field-helper">ID will be camel cased e.g. firstName, phoneNumber</div>
+        <div class="q-field-helper">ID cannot start with a number</div>
+      </div>
 
       <q-select
         v-model="widgets.inProgress.type"
@@ -252,7 +254,7 @@ export default {
     addWidget () {
       const { id, type } = this.widgets.inProgress
 
-      this.widgets.errors.id = !id || id.trim().length === 0
+      this.widgets.errors.id = !id || id.trim().length === 0 || !isNaN(id) || !isNaN(id[0])
       this.widgets.errors.type = !type || type.trim().length === 0
 
       if (this.widgets.errors.id || this.widgets.errors.type) {
