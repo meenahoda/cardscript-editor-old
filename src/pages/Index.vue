@@ -100,13 +100,24 @@
           <q-btn icon="close" round flat color="secondary" @click="openJSON = !openJSON" />
         </div>
       </div>
+
       <q-input
+        ref="FormJSON"
         v-bind:value="form | pretty"
         type="textarea"
         readonly
         dark
         color="secondary"
+        class="q-mb-md"
       />
+
+      <div class="row">
+        <div class="col text-right">
+          <q-btn icon="file_copy" round flat color="secondary" @click="copyToClipboard">
+            <q-tooltip anchor="center left" self="center right" :offset="[20, 0]">Copy to clipboard</q-tooltip>
+          </q-btn>
+        </div>
+      </div>
     </q-modal>
 
     <q-modal
@@ -205,9 +216,9 @@
 </template>
 
 <style>
-.list-complete-item {
-  /* transition: all 1s; */
-}
+/* .list-complete-item {
+  transition: all 1s;
+} */
 
 .list-complete-enter, .list-complete-leave-active {
   opacity: 0;
@@ -324,6 +335,15 @@ export default {
     removeWidget (idx) {
       this.form.widgets.splice(idx, 1)
       this.widgets.result.splice(idx, 1)
+    },
+    copyToClipboard () {
+      this.$refs['FormJSON'].select()
+      document.execCommand('copy')
+      this.$q.notify({
+        type: 'info',
+        position: 'top',
+        message: 'Copied to clipboard.'
+      })
     }
   },
   filters: {
