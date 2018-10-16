@@ -34,7 +34,9 @@
                   />
                   <div class="row">
                     <div class="col text-right">
-                      <q-btn icon="delete" flat round @click="removeWidget(idx)" />
+                      <q-btn icon="delete" flat round @click="removeWidget(idx)">
+                        <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">Remove</q-tooltip>
+                      </q-btn>
                     </div>
                   </div>
                 </q-card-main>
@@ -86,15 +88,7 @@
                         text-color="white"
                       />
                     </div>
-                    <div class="col" v-if="item.type === 'OpenURL'">
-                      <!-- TODO: config - dependant on type - need to delete if switch away from OpenURL -->
-                      <q-input
-                        v-model="item.config.url"
-                        float-label="URL"
-                        color="secondary"
-                        dark
-                      />
-                    </div>
+                    <!-- TODO: config - dependant on type - need to delete if switch away from OpenURL -->
                   </div>
                 </q-card-main>
               </q-card>
