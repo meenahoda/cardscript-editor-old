@@ -284,7 +284,8 @@ export default {
           { label: 'Text', value: 'Text' },
           { label: 'Number', value: 'Number' },
           { label: 'Date', value: 'Date' },
-          { label: 'Date Time', value: 'DateTime' }
+          { label: 'Date Time', value: 'DateTime' },
+          { label: 'Expandable Notice', value: 'ExpandableNotice' }
         ],
         inProgress: {},
         errors: {
