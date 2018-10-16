@@ -283,7 +283,8 @@ export default {
         available: [
           { label: 'Text', value: 'Text' },
           { label: 'Number', value: 'Number' },
-          { label: 'Date', value: 'Date' }
+          { label: 'Date', value: 'Date' },
+          { label: 'Date Time', value: 'DateTime' }
         ],
         inProgress: {},
         errors: {
@@ -312,7 +313,7 @@ export default {
   watch: {
     'form.widgets' (arr) {
       this.widgets.result = arr.map(e => {
-        const type = startCase(e.type)
+        const type = startCase(e.type).replace(/\s+/g, '')
         return () => import(`components/${type}.vue`)
       })
     }
