@@ -12,6 +12,7 @@
         <q-input
           float-label="Default"
           v-model="data.attributes.default"
+          type="number"
           dark
           color="secondary"
         />
@@ -20,6 +21,7 @@
         <q-input
           float-label="Minimum"
           v-model="data.attributes.minimum"
+          type="number"
           dark
           color="secondary"
         />
@@ -28,6 +30,7 @@
         <q-input
           float-label="Maximum"
           v-model="data.attributes.maximum"
+          type="number"
           dark
           color="secondary"
         />
@@ -37,6 +40,15 @@
     <q-toggle
       label="Mandatory"
       v-model="data.attributes.mandatory"
+      dark
+      color="secondary"
+      left-label
+      class="q-mt-md q-mr-md"
+    />
+
+    <q-toggle
+      label="Enabled"
+      v-model="data.attributes.enabled"
       dark
       color="secondary"
       left-label
