@@ -80,12 +80,12 @@
         <q-tooltip anchor="center left" self="center right" :offset="[20, 0]">Add Action</q-tooltip>
       </q-fab-action>
 
-      <q-fab-action
+      <!-- <q-fab-action
         color="secondary"
         icon="remove_red_eye"
       >
         <q-tooltip anchor="center left" self="center right" :offset="[20, 0]">Preview</q-tooltip>
-      </q-fab-action>
+      </q-fab-action> -->
     </q-fab>
 
     <q-modal
@@ -283,7 +283,33 @@ export default {
       this.actions.open = true
       this.actions.inProgress = {}
     },
-    addAction () {},
+    addAction () {
+      const { type, style, title } = this.actions.inProgress
+
+      this.actions.errors.title = !title || title.trim().length === 0
+      this.actions.errors.style = !style
+      this.actions.errors.type = !type
+
+      if (this.actions.errors.title || this.actions.errors.style || this.actions.errors.type) {
+        this.$q.notify({
+          type: 'warning',
+          position: 'top',
+          message: 'An action must have a title, type and style.'
+        })
+
+        return
+      }
+
+      this.form.actions.push({ title, type, style, config: {} })
+
+      this.$q.notify({
+        type: 'positive',
+        position: 'top',
+        message: 'The action has been added.'
+      })
+
+      this.actions.open = false
+    },
     openWidgetsModal () {
       this.widgets.open = !this.widgets.open
       this.widgets.inProgress = {}
