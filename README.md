@@ -1,8 +1,8 @@
 # QScript Form Editor
 
-> An editor to help create [QScript](https://github.com/wmfs/qscript) forms.
+> An editor to help create [QScript](https://github.com/wmfs/qscript) views.
 
-The idea is for it become a drag-n-drop interface where you can create the form without having to write any JSON.
+The idea is for it become a drag-n-drop interface where you can create the view without having to write any JSON.
 
 ## Contributing
 
