@@ -13,28 +13,34 @@
         <div class="text-light q-my-lg">Widgets</div>
         <div v-if="form.widgets.length === 0">There are no widgets.</div>
         <div v-else>
-          <q-card
-            v-for="(item, idx) in form.widgets"
-            :key="idx"
-            color="tertiary"
-            class="q-mb-sm"
-          >
-            <q-card-main>
-              <div class="row">
-                <div class="col text-light">{{ item.id }}</div>
-                <div class="col text-light text-right">{{ item.type }}</div>
-              </div>
-              <component
-                :is="widgets.result[idx]"
-                :data="form.widgets[idx]"
-              />
-              <div class="row">
-                <div class="col text-right">
-                  <q-btn icon="delete" flat round @click="removeWidget(idx)" />
-                </div>
-              </div>
-            </q-card-main>
-          </q-card>
+          <draggable v-model="form.widgets">
+            <transition-group name="list-complete">
+              <q-card
+                v-for="(item, idx) in form.widgets"
+                :key="idx"
+                color="tertiary"
+                class="q-mb-sm list-complete-item"
+              >
+                <q-card-main>
+                  <div class="row">
+                    <div class="col text-light">{{ item.id }} /  {{ item.type }}</div>
+                    <div class="col text-light text-right">
+                      <q-icon name="drag_indicator" style="cursor: move;" />
+                    </div>
+                  </div>
+                  <component
+                    :is="widgets.result[idx]"
+                    :data="form.widgets[idx]"
+                  />
+                  <div class="row">
+                    <div class="col text-right">
+                      <q-btn icon="delete" flat round @click="removeWidget(idx)" />
+                    </div>
+                  </div>
+                </q-card-main>
+              </q-card>
+            </transition-group>
+          </draggable>
         </div>
 
         <div class="text-light q-my-lg">Actions</div>
@@ -198,11 +204,23 @@
   </q-page>
 </template>
 
+<style>
+.list-complete-item {
+  /* transition: all 1s; */
+}
+
+.list-complete-enter, .list-complete-leave-active {
+  opacity: 0;
+}
+</style>
+
 <script>
-import { camelCase } from 'lodash'
+import draggable from 'vuedraggable'
+import { camelCase, startCase } from 'lodash'
 
 export default {
   name: 'Index',
+  components: { draggable },
   data () {
     return {
       form: {
@@ -239,6 +257,14 @@ export default {
         inProgress: {},
         errors: {}
       }
+    }
+  },
+  watch: {
+    'form.widgets' (arr) {
+      this.widgets.result = arr.map(e => {
+        const type = startCase(e.type)
+        return () => import(`components/${type}.vue`)
+      })
     }
   },
   methods: {
@@ -282,8 +308,6 @@ export default {
         type: camelCase(type),
         attributes: {}
       })
-
-      this.widgets.result.push(() => import(`components/${type}.vue`))
 
       this.$q.notify({
         type: 'positive',
