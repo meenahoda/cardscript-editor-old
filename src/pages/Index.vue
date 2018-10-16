@@ -384,11 +384,17 @@ export default {
         return
       }
 
-      this.form.widgets.push({
+      const widget = {
         id: camelCase(id),
         type: camelCase(type),
         attributes: {}
-      })
+      }
+
+      if (type === 'FileUpload') {
+        widget.attributes.formatRestriction = []
+      }
+
+      this.form.widgets.push(widget)
 
       this.$q.notify({
         type: 'positive',

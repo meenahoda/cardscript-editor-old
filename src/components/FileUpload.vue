@@ -21,10 +21,14 @@
 
     <div class="row">
       <div class="col q-pr-md">
-        // TODO: formatRestriction
-        <!-- <q-chips-input
+        <q-chips-input
+          float-label="Format Restriction"
           v-model="data.attributes.formatRestriction"
-        /> -->
+          dark
+          color="secondary"
+          chips-color="white"
+          chips-bg-color="dark"
+        />
       </div>
       <div class="col">
         <q-input
