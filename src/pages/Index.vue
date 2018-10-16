@@ -28,6 +28,11 @@
                 :is="widgets.result[idx]"
                 :data="form.widgets[idx]"
               />
+              <div class="row">
+                <div class="col text-right">
+                  <q-btn icon="delete" flat round @click="removeWidget(idx)" />
+                </div>
+              </div>
             </q-card-main>
           </q-card>
         </div>
@@ -289,6 +294,10 @@ export default {
     getWidget (id) {
       const filtered = this.form.widgets.filter(e => e.id === id)
       return filtered.length === 1 ? filtered[0] : null
+    },
+    removeWidget (idx) {
+      this.form.widgets.splice(idx, 1)
+      this.widgets.result.splice(idx, 1)
     }
   },
   filters: {
