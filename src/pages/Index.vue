@@ -104,41 +104,10 @@
       </q-card-main>
     </q-card>
 
-    <q-fab
-      color="secondary"
-      icon="add"
-      direction="up"
-      class="fixed"
-      style="right: 18px; bottom: 18px"
-    >
-      <q-fab-action
-        color="secondary"
-        icon="code"
-        @click="openJSON = !openJSON"
-      >
-        <q-tooltip anchor="center left" self="center right" :offset="[20, 0]">See JSON</q-tooltip>
-      </q-fab-action>
-
-      <q-fab-action
-        color="secondary"
-        icon="widgets"
-        @click="openWidgetsModal"
-      >
-        <q-tooltip anchor="center left" self="center right" :offset="[20, 0]">Add Widget</q-tooltip>
-      </q-fab-action>
-
-      <q-fab-action
-        color="secondary"
-        icon="more_horiz"
-        @click="openActionModal"
-      >
-        <q-tooltip anchor="center left" self="center right" :offset="[20, 0]">Add Action</q-tooltip>
-      </q-fab-action>
-    </q-fab>
-
     <q-modal
       v-model="openJSON"
-      content-classes="bg-dark q-pa-lg"
+      content-classes="bg-dark q-pa-xl"
+      maximized
     >
       <div class="row">
         <div class="col-10 text-grey q-mt-md">
@@ -264,6 +233,39 @@
         />
       </div>
     </q-modal>
+
+    <q-btn
+      round
+      color="secondary"
+      class="fixed"
+      icon="code"
+      style="right: 20px; bottom: 18px"
+      @click="openJSON = !openJSON"
+    >
+      <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">See JSON</q-tooltip>
+    </q-btn>
+
+    <q-btn
+      round
+      color="secondary"
+      class="fixed"
+      icon="widgets"
+      style="right: 72px; bottom: 18px"
+      @click="openWidgetsModal"
+    >
+      <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">Add Widget</q-tooltip>
+    </q-btn>
+
+    <q-btn
+      round
+      color="secondary"
+      class="fixed"
+      icon="more_horiz"
+      style="right: 126px; bottom: 18px"
+      @click="openActionModal"
+    >
+      <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">Add Action</q-tooltip>
+    </q-btn>
   </q-page>
 </template>
 
