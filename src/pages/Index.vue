@@ -45,7 +45,42 @@
 
         <div class="text-light q-my-lg">Actions</div>
         <div v-if="form.actions.length === 0">There are no actions.</div>
-        <div v-else>{{form.actions}}</div>
+        <div v-else>
+          <q-card
+            v-for="(item, idx) in form.actions"
+            :key="idx"
+            color="tertiary"
+            class="q-mb-sm"
+          >
+            <q-card-main>
+              <q-input
+                v-model="item.title"
+                float-label="Title"
+                color="secondary"
+                dark
+              />
+
+              <q-select
+                v-model="item.style"
+                :options="actions.styles"
+                float-label="Style"
+                dark
+                color="secondary"
+                class="q-mb-lg"
+              />
+
+              <q-btn-toggle
+                v-model="item.type"
+                :options="actions.available"
+                toggle-color="secondary"
+                text-color="white"
+                class="q-mb-lg"
+              />
+
+              <!-- TODO: config - dependant on type -->
+            </q-card-main>
+          </q-card>
+        </div>
       </q-card-main>
     </q-card>
 
@@ -299,6 +334,8 @@ export default {
 
         return
       }
+
+      // if OpenURL, it needs config for the url
 
       this.form.actions.push({ title, type, style, config: {} })
 
