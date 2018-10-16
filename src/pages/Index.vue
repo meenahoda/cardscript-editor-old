@@ -46,40 +46,60 @@
         <div class="text-light q-my-lg">Actions</div>
         <div v-if="form.actions.length === 0">There are no actions.</div>
         <div v-else>
-          <q-card
-            v-for="(item, idx) in form.actions"
-            :key="idx"
-            color="tertiary"
-            class="q-mb-sm"
-          >
-            <q-card-main>
-              <q-input
-                v-model="item.title"
-                float-label="Title"
-                color="secondary"
-                dark
-              />
+          <draggable v-model="form.actions">
+            <transition-group name="list-complete">
+              <q-card
+                v-for="(item, idx) in form.actions"
+                :key="idx"
+                color="tertiary"
+                class="q-mb-sm"
+              >
+                <q-card-main>
+                  <div class="row">
+                    <div class="col">
+                      <q-input
+                        v-model="item.title"
+                        float-label="Title"
+                        class="q-mr-md"
+                        color="secondary"
+                        dark
+                      />
+                    </div>
+                    <div class="col">
+                      <q-select
+                        v-model="item.style"
+                        :options="actions.styles"
+                        float-label="Style"
+                        dark
+                        color="secondary"
+                        class="q-mb-lg"
+                      />
+                    </div>
+                  </div>
 
-              <q-select
-                v-model="item.style"
-                :options="actions.styles"
-                float-label="Style"
-                dark
-                color="secondary"
-                class="q-mb-lg"
-              />
-
-              <q-btn-toggle
-                v-model="item.type"
-                :options="actions.available"
-                toggle-color="secondary"
-                text-color="white"
-                class="q-mb-lg"
-              />
-
-              <!-- TODO: config - dependant on type -->
-            </q-card-main>
-          </q-card>
+                  <div class="row">
+                    <div class="col">
+                      <q-btn-toggle
+                        v-model="item.type"
+                        :options="actions.available"
+                        toggle-color="secondary"
+                        text-color="white"
+                      />
+                    </div>
+                    <div class="col" v-if="item.type === 'OpenURL'">
+                      <!-- TODO: config - dependant on type - need to delete if switch away from OpenURL -->
+                      <q-input
+                        v-model="item.config.url"
+                        float-label="URL"
+                        color="secondary"
+                        dark
+                      />
+                    </div>
+                  </div>
+                </q-card-main>
+              </q-card>
+            </transition-group>
+          </draggable>
         </div>
       </q-card-main>
     </q-card>
@@ -114,13 +134,6 @@
       >
         <q-tooltip anchor="center left" self="center right" :offset="[20, 0]">Add Action</q-tooltip>
       </q-fab-action>
-
-      <!-- <q-fab-action
-        color="secondary"
-        icon="remove_red_eye"
-      >
-        <q-tooltip anchor="center left" self="center right" :offset="[20, 0]">Preview</q-tooltip>
-      </q-fab-action> -->
     </q-fab>
 
     <q-modal
@@ -147,6 +160,10 @@
       />
 
       <div class="row">
+        <div class="col text-faded">
+          To see this view rendered, paste the above code into the
+           <a href="https://wmfs.github.io/qscript/" target="_blank">QScript Playpen</a>.
+        </div>
         <div class="col text-right">
           <q-btn icon="file_copy" round flat color="secondary" @click="copyToClipboard">
             <q-tooltip anchor="center left" self="center right" :offset="[20, 0]">Copy to clipboard</q-tooltip>
@@ -257,6 +274,10 @@
 
 .list-complete-enter, .list-complete-leave-active {
   opacity: 0;
+}
+
+a {
+  color: #26a69a;
 }
 </style>
 
