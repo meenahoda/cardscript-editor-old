@@ -18,6 +18,7 @@ module.exports = function (ctx) {
     ],
     supportIE: false,
     build: {
+      publicPath: 'qscript-form-editor',
       scopeHoisting: true,
       // vueRouterMode: 'history',
       // vueCompiler: true,
