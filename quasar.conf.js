@@ -61,6 +61,7 @@ module.exports = function (ctx) {
         'QCardMain',
         'QField',
         'QInput',
+        'QChipsInput',
         'QSelect',
         'QToggle',
         'QBtnToggle',

@@ -285,7 +285,8 @@ export default {
           { label: 'Number', value: 'Number' },
           { label: 'Date', value: 'Date' },
           { label: 'Date Time', value: 'DateTime' },
-          { label: 'Expandable Notice', value: 'ExpandableNotice' }
+          { label: 'Expandable Notice', value: 'ExpandableNotice' },
+          { label: 'File Upload', value: 'FileUpload' }
         ],
         inProgress: {},
         errors: {
