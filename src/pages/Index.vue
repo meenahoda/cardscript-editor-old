@@ -286,7 +286,7 @@ export default {
         widget.attributes.formatRestriction = []
       }
 
-      if (type === 'checkboxList') {
+      if (['checkboxList', 'questionnaire', 'radio', 'select'].includes(type)) {
         widget.attributes.titleMap = []
       }
 
