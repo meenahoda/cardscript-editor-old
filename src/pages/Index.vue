@@ -114,7 +114,7 @@
                       text-color="white"
                     />
                   </div>
-                  <!-- TODO: config - dependant on type - need to delete if switch away from OpenURL -->
+                  <!-- TODO: config.url if OpenURL -->
                 </div>
               </q-card-main>
             </q-card>
@@ -208,9 +208,9 @@ export default {
           // SubView
           // Switch
           // Table
-          { label: 'Text', value: 'Text' }
-          // TextArea
-          // Time
+          { label: 'Text', value: 'Text' },
+          { label: 'Text Area', value: 'TextArea' },
+          { label: 'Time', value: 'Time' }
         ],
         inProgress: {},
         errors: {
