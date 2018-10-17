@@ -196,31 +196,31 @@ export default {
           { label: 'API Lookup', value: 'ApiLookup' },
           { label: 'Button List', value: 'ButtonList' },
           { label: 'Checkbox List', value: 'CheckboxList' },
-          // Currency
+          { label: 'Currency', value: 'Currency' },
           { label: 'Date', value: 'Date' },
           { label: 'Date Time', value: 'DateTime' },
-          // EndSet
-          // EndSubView
+          { label: 'End Set', value: 'EndSet' },
+          { label: 'End Sub View', value: 'EndSubView' },
           { label: 'Expandable Notice', value: 'ExpandableNotice' },
           { label: 'File Upload', value: 'FileUpload' },
-          // Header
-          // Heading
-          // HorizontalLine
-          // Image
-          // Map
+          { label: 'Header', value: 'Header' },
+          { label: 'Heading', value: 'Heading' },
+          { label: 'Horizontal Line', value: 'HorizontalLine' },
+          { label: 'Image', value: 'Image' },
+          { label: 'Map', value: 'Map' },
           { label: 'Number', value: 'Number' },
-          // PropertyList
-          // Questionnaire
-          // Radio
+          { label: 'Property List', value: 'PropertyList' },
+          { label: 'Questionnaire', value: 'Questionnaire' },
+          { label: 'Radio', value: 'Radio' },
           { label: 'Rich Text', value: 'Richtext' },
-          // Select
-          // Set
-          // Signature
-          // Slider
-          // StickyNote
-          // SubView
+          { label: 'Select', value: 'Select' },
+          { label: 'Set', value: 'Set' },
+          { label: 'Signature', value: 'Signature' },
+          { label: 'Slider', value: 'Slider' },
+          { label: 'Sticky Note', value: 'StickyNote' },
+          { label: 'Sub View', value: 'SubView' },
           { label: 'Switch', value: 'Switch' },
-          // Table
+          { label: 'Table', value: 'Table' },
           { label: 'Text', value: 'Text' },
           { label: 'Text Area', value: 'Textarea' },
           { label: 'Time', value: 'Time' }
@@ -321,7 +321,9 @@ export default {
       this.openPreview = true
     },
     importing (view) {
-      this.view = JSON.parse(view)
+      const parsed = JSON.parse(view)
+      if (!parsed.actions) parsed.actions = []
+      this.view = parsed
       this.$q.loading.show()
       setTimeout(() => {
         this.openLoad = false
