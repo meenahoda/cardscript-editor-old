@@ -199,7 +199,7 @@ export default {
           // PropertyList
           // Questionnaire
           // Radio
-          // RichText
+          { label: 'Rich Text', value: 'Richtext' },
           // Select
           // Set
           // Signature
