@@ -19,6 +19,8 @@
           float-label="Paste your QScript code here"
           v-model="view"
           type="textarea"
+          :max-height="600"
+          rows="7"
           dark
           color="secondary"
           class="q-mb-md"
