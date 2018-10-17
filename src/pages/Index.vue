@@ -206,10 +206,10 @@ export default {
           // Slider
           // StickyNote
           // SubView
-          // Switch
+          { label: 'Switch', value: 'Switch' },
           // Table
           { label: 'Text', value: 'Text' },
-          { label: 'Text Area', value: 'TextArea' },
+          { label: 'Rich Text', value: 'Richtext' },
           { label: 'Time', value: 'Time' }
         ],
         inProgress: {},
