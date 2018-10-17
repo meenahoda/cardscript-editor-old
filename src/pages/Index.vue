@@ -1,259 +1,136 @@
 <template>
-  <q-page class="flex flex-center">
-    <q-card color="dark no-shadow" style="min-width: 50vw; min-height: 50vh;">
-      <q-card-title>QScript View Editor</q-card-title>
-      <q-card-main>
-        <q-input
-          v-model="view.title"
-          float-label="Title"
-          dark
-          color="secondary"
-        />
+  <q-page>
+    <q-toolbar color="secondary">
+      <q-toolbar-title>
+        QScript View Editor
+      </q-toolbar-title>
+      <!-- TODO: buttons for quick view/full view -->
+      <q-btn icon="code" @click="preview" flat round dense />
+    </q-toolbar>
 
-        <div class="text-light q-my-lg">Widgets</div>
-        <div v-if="view.widgets.length === 0">There are no widgets.</div>
-        <div v-else>
-          <draggable v-model="view.widgets">
+    <div>
+      <div class="row" style="min-height: calc(100vh - 50px);">
+        <div class="col-xl-2 col-3" style="background: #343434;">
+          <q-list
+            dark
+            no-border
+          >
+            <q-item
+              v-for="(item, idx) in widgets.options"
+              :key="idx"
+            >
+              <q-item-main :label="item.label" />
+              <q-item-side right>
+                <q-btn icon="add" flat round dense @click="addingWidget(item.value)" />
+              </q-item-side>
+            </q-item>
+            <q-item-separator />
+            <q-item>
+              <q-item-main label="Action" />
+              <q-item-side right>
+                <q-btn icon="add" flat round dense @click="addAction" />
+              </q-item-side>
+            </q-item>
+          </q-list>
+        </div>
+        <div class="col-xl-10 col-9 q-px-lg q-mb-lg">
+          <div class="text-light q-my-lg">Widgets</div>
+          <div v-if="view.widgets.length === 0" class="text-light text-weight-thin">There are no widgets.</div>
+          <div v-else>
+            <draggable v-model="view.widgets">
+              <q-card
+                v-for="(item, idx) in view.widgets"
+                :key="idx"
+                color="tertiary"
+                class="q-mb-sm"
+              >
+              <q-card-main>
+                  <div class="row">
+                    <div class="col text-light">{{ item.id }} /  {{ item.type }}</div>
+                    <div class="col text-light text-right">
+                      <q-icon name="drag_indicator" style="cursor: move;" />
+                    </div>
+                  </div>
+                  <component
+                    :is="widgets.result[idx]"
+                    :data="view.widgets[idx]"
+                  />
+                  <div class="row">
+                    <div class="col text-right">
+                      <q-btn icon="delete" flat round @click="removeWidget(idx)">
+                        <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">Remove</q-tooltip>
+                      </q-btn>
+                    </div>
+                  </div>
+                </q-card-main>
+              </q-card>
+            </draggable>
+          </div>
+
+          <div class="text-light q-my-lg">Actions</div>
+          <div v-if="view.actions.length === 0" class="text-light text-weight-thin">There are no actions.</div>
+          <div v-else>
             <q-card
-              v-for="(item, idx) in view.widgets"
+              v-for="(item, idx) in view.actions"
               :key="idx"
               color="tertiary"
               class="q-mb-sm"
             >
               <q-card-main>
                 <div class="row">
-                  <div class="col text-light">{{ item.id }} /  {{ item.type }}</div>
-                  <div class="col text-light text-right">
-                    <q-icon name="drag_indicator" style="cursor: move;" />
+                  <div class="col">
+                    <q-input
+                      v-model="item.title"
+                      float-label="Title"
+                      class="q-mr-md"
+                      color="secondary"
+                      dark
+                    />
+                  </div>
+                  <div class="col">
+                    <q-select
+                      v-model="item.style"
+                      :options="actions.styles"
+                      float-label="Style"
+                      dark
+                      color="secondary"
+                      class="q-mb-lg"
+                    />
                   </div>
                 </div>
-                <component
-                  :is="widgets.result[idx]"
-                  :data="view.widgets[idx]"
-                />
+
                 <div class="row">
-                  <div class="col text-right">
-                    <q-btn icon="delete" flat round @click="removeWidget(idx)">
-                      <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">Remove</q-tooltip>
-                    </q-btn>
+                  <div class="col">
+                    <q-btn-toggle
+                      v-model="item.type"
+                      :options="actions.options"
+                      toggle-color="secondary"
+                      text-color="white"
+                    />
                   </div>
+                  <!-- TODO: config - dependant on type - need to delete if switch away from OpenURL -->
                 </div>
               </q-card-main>
             </q-card>
-          </draggable>
-        </div>
-
-        <div class="text-light q-my-lg">Actions</div>
-        <div v-if="view.actions.length === 0">There are no actions.</div>
-        <div v-else>
-          <q-card
-            v-for="(item, idx) in view.actions"
-            :key="idx"
-            color="tertiary"
-            class="q-mb-sm"
-          >
-            <q-card-main>
-              <div class="row">
-                <div class="col">
-                  <q-input
-                    v-model="item.title"
-                    float-label="Title"
-                    class="q-mr-md"
-                    color="secondary"
-                    dark
-                  />
-                </div>
-                <div class="col">
-                  <q-select
-                    v-model="item.style"
-                    :options="actions.styles"
-                    float-label="Style"
-                    dark
-                    color="secondary"
-                    class="q-mb-lg"
-                  />
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col">
-                  <q-btn-toggle
-                    v-model="item.type"
-                    :options="actions.options"
-                    toggle-color="secondary"
-                    text-color="white"
-                  />
-                </div>
-                <!-- TODO: config - dependant on type - need to delete if switch away from OpenURL -->
-              </div>
-            </q-card-main>
-          </q-card>
-        </div>
-      </q-card-main>
-    </q-card>
-
-    <q-modal
-      v-model="openJSON"
-      content-classes="bg-dark q-pa-xl"
-      maximized
-    >
-      <div class="row">
-        <div class="col-10 text-grey q-mt-md">
-          QScript JSON
-        </div>
-        <div class="col-2 text-right">
-          <q-btn icon="close" round flat color="secondary" @click="openJSON = !openJSON" />
+          </div>
         </div>
       </div>
+    </div>
 
-      <q-input
-        ref="viewJSON"
-        v-bind:value="view | pretty"
-        type="textarea"
-        readonly
-        dark
-        color="secondary"
-        class="q-mb-md"
-      />
+    <widget-modal
+      :open="widgets.open"
+      :data="widgets.inProgress"
+      :errors="widgets.errors"
+      @close="widgets.open = !widgets.open"
+      @add="addWidget"
+    />
 
-      <div class="row">
-        <div class="col text-faded">
-          To see this view rendered, paste the above code into the
-           <a href="https://wmfs.github.io/qscript/" target="_blank">QScript Playpen</a>.
-        </div>
-        <div class="col text-right">
-          <q-btn icon="file_copy" round flat color="secondary" @click="copyToClipboard">
-            <q-tooltip anchor="center left" self="center right" :offset="[20, 0]">Copy to clipboard</q-tooltip>
-          </q-btn>
-        </div>
-      </div>
-    </q-modal>
+    <preview-modal
+      :open="openPreview"
+      :data="view"
+      @close="openPreview = !openPreview"
+    />
 
-    <q-modal
-      v-model="actions.open"
-      content-classes="bg-dark q-pa-lg"
-    >
-      <div class="row">
-        <div class="col-10 text-grey q-mt-md">
-          Actions
-        </div>
-        <div class="col-2 text-right">
-          <q-btn icon="close" round flat color="secondary" @click="actions.open = !actions.open" />
-        </div>
-      </div>
-
-      <q-input
-        v-model="actions.inProgress.title"
-        float-label="Title"
-        dark
-        color="secondary"
-        class="q-mb-lg"
-      />
-
-      <q-select
-        v-model="actions.inProgress.style"
-        :options="actions.styles"
-        float-label="Style"
-        dark
-        color="secondary"
-        class="q-mb-lg"
-      />
-
-      <q-btn-toggle
-        v-model="actions.inProgress.type"
-        :options="actions.options"
-        toggle-color="secondary"
-        text-color="white"
-        class="q-mb-lg"
-      />
-
-      <div class="text-right">
-        <q-btn
-          icon="send"
-          round
-          color="secondary"
-          @click="addAction"
-        />
-      </div>
-    </q-modal>
-
-    <q-modal
-      v-model="widgets.open"
-      content-classes="bg-dark q-pa-lg"
-    >
-      <div class="row">
-        <div class="col-10 text-grey q-mt-md">
-          Widgets
-        </div>
-        <div class="col-2 text-right">
-          <q-btn icon="close" round flat color="secondary" @click="widgets.open = !widgets.open" />
-        </div>
-      </div>
-
-      <q-input
-        v-model="widgets.inProgress.id"
-        float-label="ID"
-        dark
-        color="secondary"
-        :error="widgets.errors.id"
-      />
-      <div class="q-field-bottom">
-        <div class="q-field-helper">ID will be camel cased e.g. firstName, phoneNumber</div>
-        <div class="q-field-helper">ID cannot start with a number</div>
-      </div>
-
-      <q-select
-        v-model="widgets.inProgress.type"
-        :options="widgets.options"
-        float-label="Type"
-        dark
-        color="secondary"
-        class="q-mb-lg"
-        :error="widgets.errors.type"
-      />
-
-      <div class="text-right">
-        <q-btn
-          icon="send"
-          round
-          color="secondary"
-          @click="addWidget"
-        />
-      </div>
-    </q-modal>
-
-    <q-btn
-      round
-      color="secondary"
-      class="fixed"
-      icon="code"
-      style="right: 20px; bottom: 18px"
-      @click="openJSON = !openJSON"
-    >
-      <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">See JSON</q-tooltip>
-    </q-btn>
-
-    <q-btn
-      round
-      color="secondary"
-      class="fixed"
-      icon="widgets"
-      style="right: 72px; bottom: 18px"
-      @click="openWidgetsModal"
-    >
-      <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">Add Widget</q-tooltip>
-    </q-btn>
-
-    <q-btn
-      round
-      color="secondary"
-      class="fixed"
-      icon="more_horiz"
-      style="right: 126px; bottom: 18px"
-      @click="openActionModal"
-    >
-      <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">Add Action</q-tooltip>
-    </q-btn>
   </q-page>
 </template>
 
@@ -267,9 +144,24 @@ a {
 import draggable from 'vuedraggable'
 import { camelCase, startCase } from 'lodash'
 
+const WidgetModal = () => import('components/modals/Widget.vue')
+const PreviewModal = () => import('components/modals/Preview.vue')
+
 export default {
-  name: 'Index',
-  components: { draggable },
+  name: 'PageIndex',
+  components: {
+    draggable,
+    WidgetModal,
+    PreviewModal
+  },
+  watch: {
+    'view.widgets' (arr) {
+      this.widgets.result = arr.map(e => {
+        const type = startCase(e.type).replace(/\s+/g, '')
+        return () => import(`components/${type}.vue`)
+      })
+    }
+  },
   data () {
     return {
       view: {
@@ -277,7 +169,7 @@ export default {
         widgets: [],
         actions: []
       },
-      openJSON: false,
+      openPreview: false,
       widgets: {
         open: false,
         options: [
@@ -322,7 +214,6 @@ export default {
         result: []
       },
       actions: {
-        open: false,
         options: [
           { label: 'Open URL', value: 'OpenURL' },
           { label: 'Submit', value: 'Submit' },
@@ -332,69 +223,25 @@ export default {
           { label: 'Positive', value: 'positive' },
           { label: 'Negative', value: 'negative' },
           { label: 'Warning', value: 'warning' }
-        ],
-        inProgress: {},
-        errors: {}
+        ]
       }
-    }
-  },
-  watch: {
-    'view.widgets' (arr) {
-      this.widgets.result = arr.map(e => {
-        const type = startCase(e.type).replace(/\s+/g, '')
-        return () => import(`components/${type}.vue`)
-      })
     }
   },
   methods: {
-    openActionModal () {
-      this.actions.open = true
-      this.actions.inProgress = {}
-    },
-    addAction () {
-      const { type, style, title } = this.actions.inProgress
-
-      this.actions.errors.title = !title || title.trim().length === 0
-      this.actions.errors.style = !style
-      this.actions.errors.type = !type
-
-      if (this.actions.errors.title || this.actions.errors.style || this.actions.errors.type) {
-        this.$q.notify({
-          type: 'warning',
-          position: 'top',
-          message: 'An action must have a title, type and style.'
-        })
-
-        return
-      }
-
-      // if OpenURL, it needs config for the url
-
-      this.view.actions.push({ title, type, style, config: {} })
-
-      this.$q.notify({
-        type: 'positive',
-        position: 'top',
-        message: 'The action has been added.'
-      })
-
-      this.actions.open = false
-    },
-    openWidgetsModal () {
-      this.widgets.open = !this.widgets.open
-      this.widgets.inProgress = {}
+    addingWidget (type) {
+      this.widgets.inProgress = { id: '', type: camelCase(type) }
+      this.widgets.open = true
     },
     addWidget () {
       const { id, type } = this.widgets.inProgress
 
       this.widgets.errors.id = !id || id.trim().length === 0 || !isNaN(id) || !isNaN(id[0])
-      this.widgets.errors.type = !type || type.trim().length === 0
 
-      if (this.widgets.errors.id || this.widgets.errors.type) {
+      if (this.widgets.errors.id) {
         this.$q.notify({
           type: 'warning',
           position: 'top',
-          message: 'A widget requires an ID and type.'
+          message: 'An ID is required.'
         })
 
         return
@@ -412,11 +259,11 @@ export default {
 
       const widget = {
         id: camelCase(id),
-        type: camelCase(type),
+        type,
         attributes: {}
       }
 
-      if (type === 'FileUpload') {
+      if (type === 'fileUpload') {
         widget.attributes.formatRestriction = []
       }
 
@@ -438,18 +285,17 @@ export default {
       this.view.widgets.splice(idx, 1)
       this.widgets.result.splice(idx, 1)
     },
-    copyToClipboard () {
-      this.$refs['viewJSON'].select()
-      document.execCommand('copy')
-      this.$q.notify({
-        type: 'info',
-        position: 'top',
-        message: 'Copied to clipboard.'
+    addAction () {
+      this.view.actions.push({
+        title: '',
+        style: '',
+        type: '',
+        config: {}
       })
+    },
+    preview () {
+      this.openPreview = true
     }
-  },
-  filters: {
-    pretty: json => JSON.stringify(json, null, 2)
   }
 }
 </script>
