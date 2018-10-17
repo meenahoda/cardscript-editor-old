@@ -1,21 +1,21 @@
 <template>
   <q-page class="flex flex-center">
     <q-card color="dark no-shadow" style="min-width: 50vw; min-height: 50vh;">
-      <q-card-title>QScript Form Editor</q-card-title>
+      <q-card-title>QScript View Editor</q-card-title>
       <q-card-main>
         <q-input
-          v-model="form.title"
+          v-model="view.title"
           float-label="Title"
           dark
           color="secondary"
         />
 
         <div class="text-light q-my-lg">Widgets</div>
-        <div v-if="form.widgets.length === 0">There are no widgets.</div>
+        <div v-if="view.widgets.length === 0">There are no widgets.</div>
         <div v-else>
-          <draggable v-model="form.widgets">
+          <draggable v-model="view.widgets">
             <q-card
-              v-for="(item, idx) in form.widgets"
+              v-for="(item, idx) in view.widgets"
               :key="idx"
               color="tertiary"
               class="q-mb-sm"
@@ -29,7 +29,7 @@
                 </div>
                 <component
                   :is="widgets.result[idx]"
-                  :data="form.widgets[idx]"
+                  :data="view.widgets[idx]"
                 />
                 <div class="row">
                   <div class="col text-right">
@@ -44,10 +44,10 @@
         </div>
 
         <div class="text-light q-my-lg">Actions</div>
-        <div v-if="form.actions.length === 0">There are no actions.</div>
+        <div v-if="view.actions.length === 0">There are no actions.</div>
         <div v-else>
           <q-card
-            v-for="(item, idx) in form.actions"
+            v-for="(item, idx) in view.actions"
             :key="idx"
             color="tertiary"
             class="q-mb-sm"
@@ -79,7 +79,7 @@
                 <div class="col">
                   <q-btn-toggle
                     v-model="item.type"
-                    :options="actions.available"
+                    :options="actions.options"
                     toggle-color="secondary"
                     text-color="white"
                   />
@@ -107,8 +107,8 @@
       </div>
 
       <q-input
-        ref="FormJSON"
-        v-bind:value="form | pretty"
+        ref="viewJSON"
+        v-bind:value="view | pretty"
         type="textarea"
         readonly
         dark
@@ -161,7 +161,7 @@
 
       <q-btn-toggle
         v-model="actions.inProgress.type"
-        :options="actions.available"
+        :options="actions.options"
         toggle-color="secondary"
         text-color="white"
         class="q-mb-lg"
@@ -204,7 +204,7 @@
 
       <q-select
         v-model="widgets.inProgress.type"
-        :options="widgets.available"
+        :options="widgets.options"
         float-label="Type"
         dark
         color="secondary"
@@ -272,7 +272,7 @@ export default {
   components: { draggable },
   data () {
     return {
-      form: {
+      view: {
         title: '',
         widgets: [],
         actions: []
@@ -280,13 +280,39 @@ export default {
       openJSON: false,
       widgets: {
         open: false,
-        available: [
-          { label: 'Text', value: 'Text' },
-          { label: 'Number', value: 'Number' },
+        options: [
+          // Address
+          // ApiLookup
+          // ButtonList
+          // CheckboxList
+          // Currency
           { label: 'Date', value: 'Date' },
           { label: 'Date Time', value: 'DateTime' },
+          // EndSet
+          // EndSubView
           { label: 'Expandable Notice', value: 'ExpandableNotice' },
-          { label: 'File Upload', value: 'FileUpload' }
+          { label: 'File Upload', value: 'FileUpload' },
+          // Header
+          // Heading
+          // HorizontalLine
+          // Image
+          // Map
+          { label: 'Number', value: 'Number' },
+          // PropertyList
+          // Questionnaire
+          // Radio
+          // RichText
+          // Select
+          // Set
+          // Signature
+          // Slider
+          // StickyNote
+          // SubView
+          // Switch
+          // Table
+          { label: 'Text', value: 'Text' }
+          // TextArea
+          // Time
         ],
         inProgress: {},
         errors: {
@@ -297,7 +323,7 @@ export default {
       },
       actions: {
         open: false,
-        available: [
+        options: [
           { label: 'Open URL', value: 'OpenURL' },
           { label: 'Submit', value: 'Submit' },
           { label: 'Show View', value: 'ShowView' }
@@ -313,7 +339,7 @@ export default {
     }
   },
   watch: {
-    'form.widgets' (arr) {
+    'view.widgets' (arr) {
       this.widgets.result = arr.map(e => {
         const type = startCase(e.type).replace(/\s+/g, '')
         return () => import(`components/${type}.vue`)
@@ -344,7 +370,7 @@ export default {
 
       // if OpenURL, it needs config for the url
 
-      this.form.actions.push({ title, type, style, config: {} })
+      this.view.actions.push({ title, type, style, config: {} })
 
       this.$q.notify({
         type: 'positive',
@@ -394,7 +420,7 @@ export default {
         widget.attributes.formatRestriction = []
       }
 
-      this.form.widgets.push(widget)
+      this.view.widgets.push(widget)
 
       this.$q.notify({
         type: 'positive',
@@ -405,15 +431,15 @@ export default {
       this.widgets.open = false
     },
     getWidget (id) {
-      const filtered = this.form.widgets.filter(e => e.id === id)
+      const filtered = this.view.widgets.filter(e => e.id === id)
       return filtered.length === 1 ? filtered[0] : null
     },
     removeWidget (idx) {
-      this.form.widgets.splice(idx, 1)
+      this.view.widgets.splice(idx, 1)
       this.widgets.result.splice(idx, 1)
     },
     copyToClipboard () {
-      this.$refs['FormJSON'].select()
+      this.$refs['viewJSON'].select()
       document.execCommand('copy')
       this.$q.notify({
         type: 'info',

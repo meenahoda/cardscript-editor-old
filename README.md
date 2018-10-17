@@ -1,10 +1,10 @@
-# QScript Form Editor
+# QScript View Editor
 
 > An editor to help create [QScript](https://github.com/wmfs/qscript) views.
 
-https://meenahoda.github.io/qscript-form-editor/
+https://meenahoda.github.io/qscript-view-editor/
 
-The idea is for it become a drag-n-drop interface where you can create the view without having to write any JSON.
+An editor to help create QScript views without writing any JSON.
 
 ## Contributing
 
