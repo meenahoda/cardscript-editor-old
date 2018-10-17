@@ -56,7 +56,7 @@
                   <q-collapsible>
                     <template slot="header">
                       <q-item-side left icon="drag_indicator" style="cursor: move;" />
-                      <q-item-main :label="`${item.id} / ${item.type}`" />
+                      <q-item-main :label="item.id ? `${item.id} / ${item.type}` : item.type" />
                     </template>
                     <component
                       :is="widgets.result[idx]"
