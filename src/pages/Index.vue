@@ -15,6 +15,7 @@
             no-border
           >
             <q-item
+              highlight
               v-for="(item, idx) in widgets.options"
               :key="idx"
             >
@@ -24,7 +25,7 @@
               </q-item-side>
             </q-item>
             <q-item-separator />
-            <q-item>
+            <q-item highlight>
               <q-item-main label="Action" />
               <q-item-side right>
                 <q-btn icon="add" flat round dense @click="addAction" />
@@ -59,6 +60,8 @@
                     <component
                       :is="widgets.result[idx]"
                       :data="view.widgets[idx]"
+                      @addOption="addOption(idx)"
+                      @removeOption="removeOption(idx)"
                     />
                     <div class="row">
                       <div class="col text-right">
@@ -182,7 +185,7 @@ export default {
           // Address
           // ApiLookup
           // ButtonList
-          // CheckboxList
+          { label: 'Checkbox List', value: 'CheckboxList' },
           // Currency
           { label: 'Date', value: 'Date' },
           { label: 'Date Time', value: 'DateTime' },
@@ -273,6 +276,10 @@ export default {
         widget.attributes.formatRestriction = []
       }
 
+      if (type === 'checkboxList') {
+        widget.attributes.titleMap = []
+      }
+
       this.view.widgets.push(widget)
 
       this.widgets.open = false
@@ -302,6 +309,12 @@ export default {
     },
     preview () {
       this.openPreview = true
+    },
+    addOption (idx) {
+      this.view.widgets[idx].attributes.titleMap.push({ value: '', title: '' })
+    },
+    removeOption (idx) {
+      this.view.widgets[idx].attributes.titleMap.splice(idx, 1)
     }
   }
 }
