@@ -4,7 +4,8 @@
 
 https://meenahoda.github.io/qscript-view-editor/
 
-![Example Screenshot](examples/Capture2.PNG?raw=true)
+![Editor Screenshot](examples/editor.PNG?raw=true)
+![Preview Screenshot](examples/preview.PNG?raw=true)
 
 ## Contributing
 
