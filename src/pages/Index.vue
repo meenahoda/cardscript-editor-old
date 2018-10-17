@@ -33,6 +33,13 @@
           </q-list>
         </div>
         <div class="col-xl-10 col-9 q-px-lg q-mb-lg">
+          <q-input
+            float-label="Title"
+            v-model="view.title"
+            color="secondary"
+            dark
+          />
+
           <div class="text-light q-my-lg">Widgets</div>
           <div v-if="view.widgets.length === 0" class="text-light text-weight-thin">There are no widgets.</div>
           <div v-else>
