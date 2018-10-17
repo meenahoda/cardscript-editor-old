@@ -209,7 +209,7 @@ export default {
           { label: 'Switch', value: 'Switch' },
           // Table
           { label: 'Text', value: 'Text' },
-          { label: 'Rich Text', value: 'Richtext' },
+          { label: 'Text Area', value: 'Textarea' },
           { label: 'Time', value: 'Time' }
         ],
         inProgress: {},
