@@ -69,14 +69,16 @@ module.exports = function (ctx) {
         'QFab',
         'QFabAction',
         'QTooltip',
-        'QModal'
+        'QModal',
+        'QCollapsible'
       ],
       directives: [
         'Ripple'
       ],
       // Quasar plugins
       plugins: [
-        'Notify'
+        'Notify',
+        'Dialog'
       ]
       // iconSet: ctx.theme.mat ? 'material-icons' : 'ionicons'
       // i18n: 'de' // Quasar language

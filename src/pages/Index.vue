@@ -4,7 +4,6 @@
       <q-toolbar-title>
         QScript View Editor
       </q-toolbar-title>
-      <!-- TODO: buttons for quick view/full view -->
       <q-btn icon="code" @click="preview" flat round dense />
     </q-toolbar>
 
@@ -44,24 +43,24 @@
                 color="tertiary"
                 class="q-mb-sm"
               >
-              <q-card-main>
-                  <div class="row">
-                    <div class="col text-light">{{ item.id }} /  {{ item.type }}</div>
-                    <div class="col text-light text-right">
-                      <q-icon name="drag_indicator" style="cursor: move;" />
+                <q-card-main>
+                  <q-collapsible>
+                    <template slot="header">
+                      <q-item-side left icon="drag_indicator" style="cursor: move;" />
+                      <q-item-main :label="`${item.id} / ${item.type}`" />
+                    </template>
+                    <component
+                      :is="widgets.result[idx]"
+                      :data="view.widgets[idx]"
+                    />
+                    <div class="row">
+                      <div class="col text-right">
+                        <q-btn icon="delete" flat round dense @click="removeWidget(idx)">
+                          <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">Remove</q-tooltip>
+                        </q-btn>
+                      </div>
                     </div>
-                  </div>
-                  <component
-                    :is="widgets.result[idx]"
-                    :data="view.widgets[idx]"
-                  />
-                  <div class="row">
-                    <div class="col text-right">
-                      <q-btn icon="delete" flat round @click="removeWidget(idx)">
-                        <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">Remove</q-tooltip>
-                      </q-btn>
-                    </div>
-                  </div>
+                  </q-collapsible>
                 </q-card-main>
               </q-card>
             </draggable>
@@ -269,12 +268,6 @@ export default {
 
       this.view.widgets.push(widget)
 
-      this.$q.notify({
-        type: 'positive',
-        position: 'top',
-        message: 'The widget has been added.'
-      })
-
       this.widgets.open = false
     },
     getWidget (id) {
@@ -282,8 +275,15 @@ export default {
       return filtered.length === 1 ? filtered[0] : null
     },
     removeWidget (idx) {
-      this.view.widgets.splice(idx, 1)
-      this.widgets.result.splice(idx, 1)
+      this.$q.dialog({
+        title: 'Confirm',
+        message: 'Are you sure you want to remove this widget?',
+        ok: 'Yes',
+        cancel: 'No'
+      }).then(() => {
+        this.view.widgets.splice(idx, 1)
+        this.widgets.result.splice(idx, 1)
+      }).catch(() => {})
     },
     addAction () {
       this.view.actions.push({
