@@ -62,7 +62,7 @@
                       :is="widgets.result[idx]"
                       :data="view.widgets[idx]"
                       @addOption="addOption(idx)"
-                      @removeOption="removeOption(idx)"
+                      @removeOption="e => removeOption(idx, e)"
                     />
                     <div class="row">
                       <div class="col text-right">
@@ -333,8 +333,8 @@ export default {
     addOption (idx) {
       this.view.widgets[idx].attributes.titleMap.push({ value: '', title: '' })
     },
-    removeOption (idx) {
-      this.view.widgets[idx].attributes.titleMap.splice(idx, 1)
+    removeOption (widgtIdx, optIdx) {
+      this.view.widgets[widgtIdx].attributes.titleMap.splice(optIdx, 1)
     }
   }
 }

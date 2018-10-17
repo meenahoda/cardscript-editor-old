@@ -65,7 +65,7 @@
                 flat
                 dense
                 round
-                @click="$emit('removeOption')"
+                @click="$emit('removeOption', idx)"
               />
             </div>
           </div>
