@@ -4,6 +4,7 @@
       <q-toolbar-title>
         QScript View Editor
       </q-toolbar-title>
+      <q-btn icon="open_in_new" @click="openLoad = true" flat round dense />
       <q-btn icon="code" @click="preview" flat round dense />
     </q-toolbar>
 
@@ -140,6 +141,12 @@
       @close="openPreview = !openPreview"
     />
 
+    <load-modal
+      :open="openLoad"
+      @close="openLoad = !openLoad"
+      @load="importing"
+    />
+
   </q-page>
 </template>
 
@@ -155,13 +162,15 @@ import { camelCase, startCase } from 'lodash'
 
 const WidgetModal = () => import('components/modals/Widget.vue')
 const PreviewModal = () => import('components/modals/Preview.vue')
+const LoadModal = () => import('components/modals/Load.vue')
 
 export default {
   name: 'PageIndex',
   components: {
     draggable,
     WidgetModal,
-    PreviewModal
+    PreviewModal,
+    LoadModal
   },
   watch: {
     'view.widgets' (arr) {
@@ -179,12 +188,13 @@ export default {
         actions: []
       },
       openPreview: false,
+      openLoad: false,
       widgets: {
         open: false,
         options: [
-          // Address
-          // ApiLookup
-          // ButtonList
+          { label: 'Address', value: 'Address' },
+          { label: 'API Lookup', value: 'ApiLookup' },
+          { label: 'Button List', value: 'ButtonList' },
           { label: 'Checkbox List', value: 'CheckboxList' },
           // Currency
           { label: 'Date', value: 'Date' },
@@ -309,6 +319,14 @@ export default {
     },
     preview () {
       this.openPreview = true
+    },
+    importing (view) {
+      this.view = JSON.parse(view)
+      this.$q.loading.show()
+      setTimeout(() => {
+        this.openLoad = false
+        this.$q.loading.hide()
+      }, 2000)
     },
     addOption (idx) {
       this.view.widgets[idx].attributes.titleMap.push({ value: '', title: '' })
