@@ -4,8 +4,18 @@
       <q-toolbar-title>
         QScript View Editor
       </q-toolbar-title>
-      <q-btn icon="open_in_new" @click="openLoad = true" flat round dense />
-      <q-btn icon="code" @click="preview" flat round dense />
+      <q-btn icon="more_horiz" round flat dense>
+        <q-popover class="bg-tertiary">
+          <q-list link dark>
+            <q-item v-close-overlay @click.native="openLoad = true">
+              <q-item-main label="Import" />
+            </q-item>
+            <q-item v-close-overlay @click.native="openPreview = true">
+              <q-item-main label="Export" />
+            </q-item>
+          </q-list>
+        </q-popover>
+      </q-btn>
     </q-toolbar>
 
     <div>
@@ -316,9 +326,6 @@ export default {
         type: '',
         config: {}
       })
-    },
-    preview () {
-      this.openPreview = true
     },
     importing (view) {
       const parsed = JSON.parse(view)

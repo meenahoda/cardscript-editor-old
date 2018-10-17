@@ -11,9 +11,9 @@ module.exports = function (ctx) {
     ],
     extras: [
       ctx.theme.mat ? 'roboto-font' : null,
-      'material-icons' // optional, you are not bound to it
+      'material-icons'
+      // 'mdi'
       // 'ionicons',
-      // 'mdi',
       // 'fontawesome'
     ],
     supportIE: false,
@@ -70,10 +70,12 @@ module.exports = function (ctx) {
         'QFabAction',
         'QTooltip',
         'QModal',
-        'QCollapsible'
+        'QCollapsible',
+        'QPopover'
       ],
       directives: [
-        'Ripple'
+        'Ripple',
+        'CloseOverlay'
       ],
       // Quasar plugins
       plugins: [
