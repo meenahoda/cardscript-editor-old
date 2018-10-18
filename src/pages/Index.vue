@@ -157,6 +157,14 @@
       @load="importing"
     />
 
+    <q-btn
+      v-back-to-top
+      round
+      color="secondary"
+      class="fixed-bottom-right "
+      style="margin: 0 15px 15px 0"
+      icon="keyboard_arrow_up"
+    />
   </q-page>
 </template>
 
