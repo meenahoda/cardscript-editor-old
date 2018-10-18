@@ -1,5 +1,9 @@
 <template>
-  <div>// TODO</div>
+  <div>
+    // TODO:
+    heading - string
+    actions - array
+  </div>
 </template>
 <script>
 export default {

@@ -1,5 +1,11 @@
 <template>
-  <div>// TODO</div>
+  <div>
+    // TODO:
+    heading - string
+    backgroundImage - string
+    backgroundImageAltText - string
+    wash - string
+  </div>
 </template>
 <script>
 export default {

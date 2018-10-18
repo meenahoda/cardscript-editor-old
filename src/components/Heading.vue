@@ -1,5 +1,8 @@
 <template>
-  <div>// TODO</div>
+  <div>
+    // TODO:
+    heading - string
+  </div>
 </template>
 <script>
 export default {

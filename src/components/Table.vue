@@ -1,5 +1,12 @@
 <template>
-  <div>// TODO</div>
+  <div>
+    // TODO:
+    heading - string
+    help - string
+    dataPath - string
+    resultLimit - number
+    columns - array
+  </div>
 </template>
 <script>
 export default {
