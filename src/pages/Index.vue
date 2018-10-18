@@ -63,7 +63,7 @@
                 :class="`q-mb-sm ${nonDraggable.includes(item.type) ? 'ignore-elements' : ''}`"
               >
                 <q-card-main>
-                  <q-collapsible>
+                  <q-collapsible v-if="!['endSet', 'endSubView'].includes(item.type)">
                     <template slot="header">
                       <q-item-side v-if="!nonDraggable.includes(item.type)" left icon="drag_indicator" style="cursor: move;" />
                       <q-item-main :label="item.id ? `${item.id} / ${item.type}` : item.type" />
@@ -74,7 +74,7 @@
                       @addOption="addOption(idx)"
                       @removeOption="e => removeOption(idx, e)"
                     />
-                    <div class="row" v-if="!['endSet', 'endSubView'].includes(item.type)">
+                    <div class="row">
                       <div class="col text-right">
                         <q-btn icon="delete" flat round dense @click="removeWidget(idx)">
                           <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">Remove</q-tooltip>
@@ -82,6 +82,10 @@
                       </div>
                     </div>
                   </q-collapsible>
+
+                  <q-item v-if="['endSet', 'endSubView'].includes(item.type)">
+                    <q-item-main :label="item.type" />
+                  </q-item>
                 </q-card-main>
               </q-card>
             </draggable>
