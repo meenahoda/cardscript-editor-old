@@ -161,6 +161,7 @@
       v-back-to-top
       round
       color="secondary"
+      size="lg"
       class="fixed-bottom-right "
       style="margin: 0 15px 15px 0"
       icon="keyboard_arrow_up"
