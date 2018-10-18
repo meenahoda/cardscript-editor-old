@@ -1,8 +1,12 @@
 <template>
   <div>
-    // TODO:
-    heading - string
-    properties - array
+    <q-input
+      float-label="Heading"
+      v-model="data.attributes.heading"
+      color="secondary"
+      dark
+    />
+    <div>TODO: properties - array</div>
   </div>
 </template>
 <script>

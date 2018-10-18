@@ -1,7 +1,11 @@
 <template>
   <div>
-    // TODO:
-    heading - string
+    <q-input
+      float-label="Heading"
+      v-model="data.attributes.heading"
+      color="secondary"
+      dark
+    />
   </div>
 </template>
 <script>
