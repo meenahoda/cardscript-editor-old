@@ -66,6 +66,7 @@
                   <q-collapsible v-if="!['endSet', 'endSubView'].includes(item.type)">
                     <template slot="header">
                       <q-item-side v-if="!nonDraggable.includes(item.type)" left icon="drag_indicator" style="cursor: move;" />
+                      <q-item-side v-else />
                       <q-item-main :label="item.id ? `${item.id} / ${item.type}` : item.type" />
                     </template>
                     <component
@@ -84,6 +85,7 @@
                   </q-collapsible>
 
                   <q-item v-if="['endSet', 'endSubView'].includes(item.type)">
+                    <q-item-side />
                     <q-item-main :label="item.type" />
                   </q-item>
                 </q-card-main>
