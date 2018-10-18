@@ -8,7 +8,6 @@ https://meenahoda.github.io/qscript-editor/
 ![Preview Screenshot](examples/preview.PNG?raw=true)
 
 ## TODO
-* Handle sets/subviews
 * Finish implementing widgets (mostly the stuff with arrays)
 
 ## Contributing

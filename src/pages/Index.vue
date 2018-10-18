@@ -74,7 +74,7 @@
                       @addOption="addOption(idx)"
                       @removeOption="e => removeOption(idx, e)"
                     />
-                    <div class="row">
+                    <div class="row" v-if="!['endSet', 'endSubView'].includes(item.type)">
                       <div class="col text-right">
                         <q-btn icon="delete" flat round dense @click="removeWidget(idx)">
                           <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">Remove</q-tooltip>
