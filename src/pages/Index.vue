@@ -55,17 +55,17 @@
           <div class="text-light q-my-lg">Widgets</div>
           <div v-if="view.widgets.length === 0" class="text-light text-weight-thin">There are no widgets.</div>
           <div v-else>
-            <draggable v-model="view.widgets" :options="{ animation: 150 }">
+            <draggable v-model="view.widgets" :options="{ animation: 150, filter: '.ignore-elements' }">
               <q-card
                 v-for="(item, idx) in view.widgets"
                 :key="idx"
                 color="tertiary"
-                class="q-mb-sm"
+                :class="`q-mb-sm ${nonDraggable.includes(item.type) ? 'ignore-elements' : ''}`"
               >
                 <q-card-main>
                   <q-collapsible>
                     <template slot="header">
-                      <q-item-side left icon="drag_indicator" style="cursor: move;" />
+                      <q-item-side v-if="!nonDraggable.includes(item.type)" left icon="drag_indicator" style="cursor: move;" />
                       <q-item-main :label="item.id ? `${item.id} / ${item.type}` : item.type" />
                     </template>
                     <component
@@ -128,7 +128,6 @@
                       text-color="white"
                     />
                   </div>
-                  <!-- TODO: config.url if OpenURL -->
                 </div>
               </q-card-main>
             </q-card>
@@ -176,6 +175,10 @@ a {
 </style>
 
 <script>
+/*
+TODO:
+- when choosing 'OpenURL' action - allow to enter config.url, remove if change action type
+*/
 import draggable from 'vuedraggable'
 import { camelCase, startCase } from 'lodash'
 
@@ -206,6 +209,7 @@ export default {
         widgets: [],
         actions: []
       },
+      nonDraggable: ['set', 'endSet', 'subView', 'endSubView'],
       openPreview: false,
       openLoad: false,
       widgets: {
@@ -218,8 +222,6 @@ export default {
           { label: 'Currency', value: 'Currency' },
           { label: 'Date', value: 'Date' },
           { label: 'Date Time', value: 'DateTime' },
-          { label: 'End Set', value: 'EndSet' },
-          { label: 'End Sub View', value: 'EndSubView' },
           { label: 'Expandable Notice', value: 'ExpandableNotice' },
           { label: 'File Upload', value: 'FileUpload' },
           { label: 'Header', value: 'Header' },
@@ -309,7 +311,13 @@ export default {
         widget.attributes.titleMap = []
       }
 
-      this.view.widgets.push(widget)
+      if (type === 'set') {
+        this.view.widgets.push(widget, { type: 'endSet' })
+      } else if (type === 'subView') {
+        this.view.widgets.push(widget, { type: 'endSubView' })
+      } else {
+        this.view.widgets.push(widget)
+      }
 
       this.widgets.open = false
     },
