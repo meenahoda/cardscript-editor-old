@@ -59,7 +59,8 @@
               <q-card
                 v-for="(item, idx) in view.widgets"
                 :key="idx"
-                color="tertiary"
+                :color="nonDraggable.includes(item.type) ? '' : 'tertiary'"
+                :style="nonDraggable.includes(item.type) ? 'background: #343434; color: #fff;' : ''"
                 :class="`q-mb-sm ${nonDraggable.includes(item.type) ? 'ignore-elements' : ''}`"
               >
                 <q-card-main>
