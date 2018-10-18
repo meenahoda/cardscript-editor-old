@@ -55,7 +55,7 @@
           <div class="text-light q-my-lg">Widgets</div>
           <div v-if="view.widgets.length === 0" class="text-light text-weight-thin">There are no widgets.</div>
           <div v-else>
-            <draggable v-model="view.widgets">
+            <draggable v-model="view.widgets" :options="{ animation: 150 }">
               <q-card
                 v-for="(item, idx) in view.widgets"
                 :key="idx"
