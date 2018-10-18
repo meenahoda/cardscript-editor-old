@@ -338,6 +338,24 @@ export default {
         ok: 'Yes',
         cancel: 'No'
       }).then(() => {
+        const widget = this.view.widgets[idx]
+
+        if (widget.type === 'set') {
+          for (let i = idx + 1; i < this.view.widgets.length; i++) {
+            if (this.view.widgets[i].type === 'endSet') {
+              this.view.widgets.splice(i, 1)
+              break
+            }
+          }
+        } else if (widget.type === 'subView') {
+          for (let i = idx + 1; i < this.view.widgets.length; i++) {
+            if (this.view.widgets[i].type === 'endSubView') {
+              this.view.widgets.splice(i, 1)
+              break
+            }
+          }
+        }
+
         this.view.widgets.splice(idx, 1)
         this.widgets.result.splice(idx, 1)
       }).catch(() => {})
