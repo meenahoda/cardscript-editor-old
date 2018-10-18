@@ -18,7 +18,7 @@ module.exports = function (ctx) {
     ],
     supportIE: false,
     build: {
-      publicPath: 'qscript-view-editor',
+      publicPath: 'qscript-editor',
       scopeHoisting: true,
       // vueRouterMode: 'history',
       // vueCompiler: true,

@@ -1,8 +1,8 @@
 {
-  "name": "qscript-view-editor",
+  "name": "qscript-editor",
   "version": "1.0.0",
-  "description": "QScript View Editor",
-  "productName": "QScript View Editor",
+  "description": "QScript Editor",
+  "productName": "QScript Editor",
   "cordovaId": "org.cordova.quasar.app",
   "author": "Meena.Hoda <meena.hoda@wmfs.net>",
   "private": true,

@@ -2,7 +2,7 @@
   <q-page>
     <q-toolbar color="secondary">
       <q-toolbar-title>
-        QScript View Editor
+        QScript Editor
       </q-toolbar-title>
       <q-btn icon="more_horiz" round flat dense>
         <q-popover class="bg-tertiary">
