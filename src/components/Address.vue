@@ -47,36 +47,29 @@
           dark
           color="secondary"
           left-label
-          class="q-mt-md"
+          class="q-mt-md q-mr-md"
         />
-      </div>
-      <div class="col">
         <q-toggle
-          label="Enable Location Assist"
-          v-model="data.attributes.enableLocationAssist"
+          label="Enabled"
+          v-model="data.attributes.enabled"
           dark
           color="secondary"
           left-label
           class="q-mt-md"
         />
       </div>
-    </div>
-
-    <div class="row">
-      <div class="col q-pr-md">
+      <div class="col">
         <q-toggle
           label="Enable Unknown Option"
           v-model="data.attributes.enableUnknownOption"
           dark
           color="secondary"
           left-label
-          class="q-mt-md"
+          class="q-mt-md q-mr-md"
         />
-      </div>
-      <div class="col">
         <q-toggle
-          label="Enabled"
-          v-model="data.attributes.enabled"
+          label="Enable Location Assist"
+          v-model="data.attributes.enableLocationAssist"
           dark
           color="secondary"
           left-label
