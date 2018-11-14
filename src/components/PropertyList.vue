@@ -11,7 +11,7 @@
 </template>
 <script>
 export default {
-  name: 'QScriptPropertyList',
+  name: 'CardscriptPropertyList',
   props: [ 'data' ]
 }
 </script>

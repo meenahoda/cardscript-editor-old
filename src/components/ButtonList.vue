@@ -7,7 +7,7 @@
 </template>
 <script>
 export default {
-  name: 'QScriptButtonList',
+  name: 'CardscriptButtonList',
   props: [ 'data' ]
 }
 </script>

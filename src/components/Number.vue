@@ -59,7 +59,7 @@
 
 <script>
 export default {
-  name: 'QScriptNumber',
+  name: 'CardscriptNumber',
   props: [ 'data' ]
 }
 </script>

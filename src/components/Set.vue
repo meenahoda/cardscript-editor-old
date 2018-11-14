@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-  name: 'QScriptSet',
+  name: 'CardscriptSet',
   props: [ 'data' ]
 }
 </script>

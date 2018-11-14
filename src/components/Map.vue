@@ -107,7 +107,7 @@
 </template>
 <script>
 export default {
-  name: 'QScriptMap',
+  name: 'CardscriptMap',
   props: [ 'data' ]
 }
 </script>

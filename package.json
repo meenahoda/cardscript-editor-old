@@ -1,8 +1,8 @@
 {
-  "name": "qscript-editor",
+  "name": "cardscript-editor",
   "version": "1.0.0",
-  "description": "QScript Editor",
-  "productName": "QScript Editor",
+  "description": "Cardscript Editor",
+  "productName": "Cardscript Editor",
   "cordovaId": "org.cordova.quasar.app",
   "author": "Meena.Hoda <meena.hoda@wmfs.net>",
   "private": true,

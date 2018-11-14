@@ -85,7 +85,7 @@
 </template>
 <script>
 export default {
-  name: 'QScriptRadio',
+  name: 'CardscriptRadio',
   props: [ 'data' ]
 }
 </script>

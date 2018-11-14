@@ -39,7 +39,7 @@
 </template>
 <script>
 export default {
-  name: 'QScriptSignature',
+  name: 'CardscriptSignature',
   props: [ 'data' ]
 }
 </script>

@@ -59,7 +59,7 @@
 </template>
 <script>
 export default {
-  name: 'QScriptCurrency',
+  name: 'CardscriptCurrency',
   props: [ 'data' ]
 }
 </script>

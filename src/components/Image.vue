@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-  name: 'QScriptImage',
+  name: 'CardscriptImage',
   props: [ 'data' ]
 }
 </script>

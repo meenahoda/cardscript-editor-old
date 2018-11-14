@@ -6,7 +6,7 @@
   >
     <div class="row">
       <div class="col-10 text-grey q-mt-md">
-        QScript JSON
+        Cardscript JSON
       </div>
       <div class="col-2 text-right">
         <q-btn icon="close" round flat color="secondary" @click="$emit('close')" />
@@ -16,7 +16,7 @@
     <div class="row">
       <div class="col text-faded">
         To see this view rendered, paste the following code into the
-          <a href="https://wmfs.github.io/qscript/" target="_blank">QScript Playpen</a>.
+          <a href="https://wmfs.github.io/cardscript/" target="_blank">Cardscript Playpen</a>.
       </div>
     </div>
 

@@ -81,7 +81,7 @@
 </template>
 <script>
 export default {
-  name: 'QScriptAddress',
+  name: 'CardscriptAddress',
   props: [ 'data' ]
 }
 </script>

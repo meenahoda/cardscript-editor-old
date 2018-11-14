@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  name: 'QScriptSwitch',
+  name: 'CardscriptSwitch',
   props: [ 'data' ]
 }
 </script>

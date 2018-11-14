@@ -84,7 +84,7 @@
 
 <script>
 export default {
-  name: 'QScriptFileUpload',
+  name: 'CardscriptFileUpload',
   props: [ 'data' ]
 }
 </script>

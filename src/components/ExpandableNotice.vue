@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: 'QScriptExpandableNotice',
+  name: 'CardscriptExpandableNotice',
   props: [ 'data' ]
 }
 </script>

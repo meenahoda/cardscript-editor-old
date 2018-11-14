@@ -10,7 +10,7 @@
 </template>
 <script>
 export default {
-  name: 'QScriptHeading',
+  name: 'CardscriptHeading',
   props: [ 'data' ]
 }
 </script>

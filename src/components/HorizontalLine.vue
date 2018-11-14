@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-  name: 'QScriptHorizontalLine',
+  name: 'CardscriptHorizontalLine',
   props: [ 'data' ]
 }
 </script>

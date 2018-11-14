@@ -27,7 +27,7 @@
 </template>
 <script>
 export default {
-  name: 'QScriptStickyNote',
+  name: 'CardscriptStickyNote',
   props: [ 'data' ]
 }
 </script>

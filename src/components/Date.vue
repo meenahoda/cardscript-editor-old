@@ -57,7 +57,7 @@
 
 <script>
 export default {
-  name: 'QScriptDate',
+  name: 'CardscriptDate',
   props: [ 'data' ]
 }
 </script>

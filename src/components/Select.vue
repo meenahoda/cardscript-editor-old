@@ -85,7 +85,7 @@
 </template>
 <script>
 export default {
-  name: 'QScriptSelect',
+  name: 'CardscriptSelect',
   props: [ 'data' ]
 }
 </script>

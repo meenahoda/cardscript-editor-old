@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-  name: 'QScriptSubView',
+  name: 'CardscriptSubView',
   props: [ 'data' ]
 }
 </script>

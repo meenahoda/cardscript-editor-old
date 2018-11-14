@@ -16,7 +16,7 @@
     <div class="row">
       <div class="col">
         <q-input
-          float-label="Paste your QScript code here"
+          float-label="Paste your Cardscript code here"
           v-model="view"
           type="textarea"
           :max-height="600"

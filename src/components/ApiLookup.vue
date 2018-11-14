@@ -73,7 +73,7 @@
 </template>
 <script>
 export default {
-  name: 'QScriptApiLookup',
+  name: 'CardscriptApiLookup',
   props: [ 'data' ]
 }
 </script>

@@ -81,7 +81,7 @@
 </template>
 <script>
 export default {
-  name: 'QScriptSlider',
+  name: 'CardscriptSlider',
   props: [ 'data' ]
 }
 </script>

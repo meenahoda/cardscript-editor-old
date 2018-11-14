@@ -50,7 +50,7 @@
 
 <script>
 export default {
-  name: 'QScriptText',
+  name: 'CardscriptText',
   props: [ 'data' ]
 }
 </script>

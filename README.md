@@ -1,8 +1,8 @@
-# QScript Editor
+# Cardscript Editor
 
-> (WIP) An editor to help create [QScript](https://github.com/wmfs/qscript) views without writing any JSON.
+> (WIP) An editor to help create [Cardscript](https://github.com/wmfs/cardscript) views without writing any JSON.
 
-https://meenahoda.github.io/qscript-editor/
+https://meenahoda.github.io/cardscript-editor/
 
 ![Editor Screenshot](examples/editor.PNG?raw=true)
 ![Preview Screenshot](examples/preview.PNG?raw=true)

@@ -85,7 +85,7 @@
 </template>
 <script>
 export default {
-  name: 'QScriptQuestionnaire',
+  name: 'CardscriptQuestionnaire',
   props: [ 'data' ]
 }
 </script>

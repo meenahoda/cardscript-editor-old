@@ -107,7 +107,7 @@
 
 <script>
 export default {
-  name: 'QScriptCheckboxList',
+  name: 'CardscriptCheckboxList',
   props: [ 'data' ]
 }
 </script>

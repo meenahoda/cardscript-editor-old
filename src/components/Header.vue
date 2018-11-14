@@ -45,7 +45,7 @@
 </template>
 <script>
 export default {
-  name: 'QScriptHeader',
+  name: 'CardscriptHeader',
   props: [ 'data' ]
 }
 </script>
