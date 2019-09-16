@@ -1,8 +1,8 @@
-# Cardscript Editor
+# Cardscript Editor (Old version of Cardscript)
 
 > (WIP) An editor to help create [Cardscript](https://github.com/wmfs/cardscript) views without writing any JSON.
 
-https://meenahoda.github.io/cardscript-editor/
+https://meenahoda.github.io/cardscript-editor-old/
 
 ![Editor Screenshot](examples/editor.PNG?raw=true)
 ![Preview Screenshot](examples/preview.PNG?raw=true)
